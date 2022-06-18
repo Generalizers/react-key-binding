@@ -5,11 +5,11 @@ const path = require('path');
 
 module.exports = merge(common, {
   mode: 'development',
-  entry: path.resolve(__dirname, 'src', 'index.tsx'),
+  entry: path.resolve(__dirname, '../src', 'index.tsx'),
   devServer: {
     hot: true,
+    port: 8080,
   },
-  devtool: 'cheap-module-source-map',
   module: {
     rules: [
       {
@@ -20,7 +20,7 @@ module.exports = merge(common, {
           {
             loader: 'ts-loader',
             options: {
-              configFile: 'tsconfig.json',
+              configFile: path.resolve(__dirname, '../tsconfig.json'),
             },
           },
         ],
@@ -29,7 +29,8 @@ module.exports = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src', 'template.html'),
+      template: path.resolve(__dirname, '../src', 'template.html'),
     }),
   ],
+  devtool: 'inline-source-map',
 });
